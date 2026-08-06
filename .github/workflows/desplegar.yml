@@ -40,3 +40,7 @@ jobs:
     steps:
       - id: despliegue
         uses: actions/deploy-pages@v4
+        with:
+          # Los 10 min por defecto se agotaron con la cola de Pages llena: el sitio
+          # se publicó igual, pero el job salía en rojo. 25 min evitan ese falso fallo.
+          timeout: 1500000
