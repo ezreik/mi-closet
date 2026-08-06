@@ -3,6 +3,7 @@ import Inventario from './pantallas/Inventario'
 import Panel from './pantallas/Panel'
 import Ajustes from './pantallas/Ajustes'
 import Ficha from './pantallas/Ficha'
+import Ayuda from './pantallas/Ayuda'
 import { IconoAjustes, IconoCerrar, IconoGrafica, IconoMas, IconoPercha } from './iconos'
 
 type Pestaña = 'ropa' | 'numeros' | 'ajustes'
@@ -10,16 +11,23 @@ type Pestaña = 'ropa' | 'numeros' | 'ajustes'
 export default function App() {
   const [pestaña, setPestaña] = useState<Pestaña>('ropa')
   const [ficha, setFicha] = useState<number | 'nueva' | null>(null)
+  const [ayuda, setAyuda] = useState(false)
   const [avisoVisible, setAvisoVisible] = useState(false)
 
-  // El botón físico de atrás del móvil debe cerrar la ficha, no salir de la app.
+  // El botón físico de atrás del móvil debe cerrar lo que esté abierto, no salir de la app.
+  const enPantallaCompleta = ficha !== null || ayuda
   useEffect(() => {
-    if (ficha === null) return
-    history.pushState({ ficha: true }, '')
-    const cerrar = () => setFicha(null)
+    if (!enPantallaCompleta) return
+    history.pushState({ pantalla: true }, '')
+    const cerrar = () => {
+      setFicha(null)
+      setAyuda(false)
+    }
     addEventListener('popstate', cerrar)
     return () => removeEventListener('popstate', cerrar)
-  }, [ficha])
+  }, [enPantallaCompleta])
+
+  if (ayuda) return <Ayuda alSalir={() => setAyuda(false)} />
 
   if (ficha !== null) {
     return <Ficha id={ficha} alSalir={() => setFicha(null)} />
@@ -27,9 +35,9 @@ export default function App() {
 
   return (
     <div className="min-h-full">
-      {pestaña === 'ropa' && <Inventario alAbrir={(id) => setFicha(id)} />}
+      {pestaña === 'ropa' && <Inventario alAbrir={(id) => setFicha(id)} alAbrirAyuda={() => setAyuda(true)} />}
       {pestaña === 'numeros' && <Panel />}
-      {pestaña === 'ajustes' && <Ajustes />}
+      {pestaña === 'ajustes' && <Ajustes alAbrirAyuda={() => setAyuda(true)} />}
 
       <AvisoInstalar visible={avisoVisible} alCambiar={setAvisoVisible} />
 

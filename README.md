@@ -1,9 +1,11 @@
-# Mi Clóset
+# Lizyblue
 
 Aplicación para llevar el control de la ropa que se compra en España y se vende en México:
 qué prenda es, cuánto costó, a cuánto se vende y **cuánto queda limpio de verdad**.
 
 Hecha para Liz. Funciona en el móvil, sin internet y sin cuentas ni contraseñas.
+
+En uso: **https://ezreik.github.io/mi-closet/**
 
 ## Cómo funciona
 
@@ -26,6 +28,16 @@ Hecha para Liz. Funciona en el móvil, sin internet y sin cuentas ni contraseña
   qué marcas, tipos y plataformas dan más dinero.
 - Agrupación por viaje o compra, con los gastos generales del viaje.
 - Exportación a Excel (CSV) y copia de seguridad completa en JSON.
+- Manual de uso dentro de la propia app (Ajustes → ¿Cómo se usa?), legible sin conexión.
+
+## Manual
+
+El manual vive en dos sitios: dentro de la app (`src/pantallas/Ayuda.tsx`) y como PDF de dos páginas
+en [`manual/Lizyblue-manual.pdf`](manual/Lizyblue-manual.pdf), para mandarlo por WhatsApp.
+
+```bash
+python3 herramientas/manual.py   # regenera el PDF (necesita Google Chrome)
+```
 
 ## Desarrollo
 
@@ -46,13 +58,16 @@ Vite + React + TypeScript + Tailwind 4 + Dexie (IndexedDB) + vite-plugin-pwa.
 | `src/constantes.ts` | Tipos de prenda, tallas, plataformas y qué medidas pide cada prenda |
 | `src/fotos.ts` | Compresión de fotos y miniaturas |
 | `src/respaldo.ts` | Copia de seguridad, restauración y exportación a CSV |
-| `src/pantallas/` | Inventario, Ficha, Anuncio, Panel y Ajustes |
+| `src/pantallas/` | Inventario, Ficha, Anuncio, Panel, Ajustes y Ayuda |
 
 ### Marca
 
-Montserrat (servida en local desde `public/fuentes/`, para que funcione sin internet),
-magenta `#FF007F` y negro `#0A0A0A`, según la biblioteca de marca de epoint.
-El icono se genera con el script `herramientas/icono.py`.
+Montserrat (servida en local desde `src/fuentes/`, para que funcione sin internet), magenta
+`#FF007F` y negro `#0A0A0A`, según la biblioteca de marca de epoint, más el azul `#00A3FF` del
+apodo de Liz. El degradado magenta → azul es la firma personal: se usa en el nombre y en el icono,
+nunca en los botones. El icono se genera con `herramientas/icono.py`.
+
+Los tipos de prenda van nombrados en mexicano: playera, mezclilla, bolsa, tenis, chamarra.
 
 ## Aviso sobre las comisiones
 

@@ -13,7 +13,18 @@
   --font-sans: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
   --color-magenta: #FF007F;
   --color-magenta-suave: #FFE5F1;
+  /* El azul viene del apodo, Lizyblue: se usa en la identidad, no en los botones. */
+  --color-azul: #00A3FF;
+  --color-azul-suave: #E0F3FF;
   --color-tinta: #0A0A0A;
+}
+
+/* Firma de la marca: el nombre siempre en el degradado magenta → azul. */
+.degradado-lizy {
+  background-image: linear-gradient(100deg, #FF007F 10%, #00A3FF 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 :root {

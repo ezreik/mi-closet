@@ -8,7 +8,13 @@ import { IconoBuscar, IconoPercha } from '../iconos'
 
 type Filtro = 'todas' | Estado
 
-export default function Inventario({ alAbrir }: { alAbrir: (id: number) => void }) {
+export default function Inventario({
+  alAbrir,
+  alAbrirAyuda,
+}: {
+  alAbrir: (id: number) => void
+  alAbrirAyuda: () => void
+}) {
   const [busqueda, setBusqueda] = useState('')
   const [filtro, setFiltro] = useState<Filtro>('todas')
 
@@ -40,7 +46,10 @@ export default function Inventario({ alAbrir }: { alAbrir: (id: number) => void 
     <div className="pb-28">
       <header className="sticky top-0 z-10 bg-[#f6f6f7]/95 px-4 pb-3 pt-[calc(0.75rem+env(safe-area-inset-top))] backdrop-blur">
         <div className="mb-3 flex items-end justify-between">
-          <h1 className="text-[26px] font-extrabold leading-none tracking-tight">Mi Clóset</h1>
+          <div>
+            <h1 className="degradado-lizy w-fit text-[26px] font-extrabold leading-none tracking-tight">Lizyblue</h1>
+            <p className="mt-1 text-[11px] font-semibold text-slate-400">Tu clóset, prenda por prenda</p>
+          </div>
           {vendidas.length > 0 && (
             <div className="text-right">
               <p className="text-[11px] font-semibold text-slate-400">Ganado</p>
@@ -82,10 +91,18 @@ export default function Inventario({ alAbrir }: { alAbrir: (id: number) => void 
 
       {visibles.length === 0 ? (
         prendas.length === 0 ? (
-          <Vacio
-            titulo="Todavía no hay nada"
-            texto="Pulsa el botón rosa para dar de alta tu primera prenda. Con una foto y el precio de compra ya vale."
-          />
+          <div>
+            <Vacio
+              titulo="Todavía no hay nada"
+              texto="Pulsa el botón rosa para dar de alta tu primera prenda. Con una foto y el precio de compra ya vale."
+            />
+            <button
+              onClick={alAbrirAyuda}
+              className="mx-auto block rounded-full bg-white px-5 py-2.5 text-[13px] font-bold text-magenta shadow-[0_1px_3px_rgba(0,0,0,0.06)]"
+            >
+              ¿Cómo se usa?
+            </button>
+          </div>
         ) : (
           <Vacio titulo="Nada por aquí" texto="Prueba con otra búsqueda o cambia el filtro." />
         )

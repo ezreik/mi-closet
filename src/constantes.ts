@@ -1,13 +1,15 @@
 import type { Estado, Medidas } from './db'
 
+/** Los nombres van en mexicano: playera, mezclilla, bolsa, tenis. */
 export const TIPOS = [
   'Vestido',
   'Blusa',
+  'Playera',
   'Camisa',
   'Top',
   'Suéter',
   'Pantalón',
-  'Jeans',
+  'Mezclilla',
   'Falda',
   'Short',
   'Chamarra',
@@ -15,7 +17,8 @@ export const TIPOS = [
   'Saco',
   'Conjunto',
   'Zapatos',
-  'Bolso',
+  'Tenis',
+  'Bolsa',
   'Accesorio',
   'Otro',
 ] as const
@@ -72,6 +75,7 @@ export function medidasDe(tipo: string): (keyof Medidas)[] {
     case 'Conjunto':
       return ['pecho', 'cintura', 'cadera', 'largo', 'hombros', 'manga']
     case 'Blusa':
+    case 'Playera':
     case 'Camisa':
     case 'Top':
     case 'Suéter':
@@ -80,13 +84,14 @@ export function medidasDe(tipo: string): (keyof Medidas)[] {
     case 'Saco':
       return ['pecho', 'largo', 'hombros', 'manga']
     case 'Pantalón':
-    case 'Jeans':
+    case 'Mezclilla':
       return ['cintura', 'cadera', 'tiro', 'largo', 'pierna']
     case 'Falda':
     case 'Short':
       return ['cintura', 'cadera', 'largo']
     case 'Zapatos':
-    case 'Bolso':
+    case 'Tenis':
+    case 'Bolsa':
     case 'Accesorio':
       return ['largo']
     default:

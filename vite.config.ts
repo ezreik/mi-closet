@@ -16,9 +16,9 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,png,svg,woff2}'],
       },
       manifest: {
-        name: 'Mi Clóset — control de ventas',
-        short_name: 'Mi Clóset',
-        description: 'Inventario y ganancias de la ropa que compro en España y vendo en México.',
+        name: 'Lizyblue — mi clóset',
+        short_name: 'Lizyblue',
+        description: 'Mi inventario y mis ganancias: la ropa que compro en España y vendo en México.',
         lang: 'es',
         id: '/mi-closet/',
         start_url: '/mi-closet/',

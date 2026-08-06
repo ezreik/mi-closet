@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Intermedio del generador del manual: el entregable es el PDF
+manual/manual.html

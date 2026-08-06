@@ -68,7 +68,7 @@ export default function Panel() {
       <div className="px-3">
         <div className="rounded-2xl bg-tinta p-5 text-white">
           <p className="text-[13px] font-semibold text-white/60">Ganancia limpia hasta hoy</p>
-          <p className="mt-1 text-[36px] font-extrabold leading-none">{pesos(r.gananciaMxn)}</p>
+          <p className="degradado-lizy mt-1 text-[36px] font-extrabold leading-none">{pesos(r.gananciaMxn)}</p>
           <p className="mt-1.5 text-[13px] text-white/50">
             {r.vendidas.length} {r.vendidas.length === 1 ? 'prenda vendida' : 'prendas vendidas'} · margen medio{' '}
             {r.margenMedio.toFixed(0)} %

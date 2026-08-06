@@ -1,7 +1,8 @@
-"""Genera los iconos de la app: percha blanca sobre el magenta de epoint.
+"""Genera los iconos de la app: percha blanca sobre el degradado de Lizyblue.
 
     python3 herramientas/icono.py
 
+El fondo va del magenta de epoint al azul del apodo, en diagonal.
 Dibuja en 4096 px y reduce con LANCZOS, que es lo que da los bordes suaves.
 Los arcos van como polilínea y no con ImageDraw.arc: arc reparte el grosor
 hacia dentro del bbox y deja un escalón donde el gancho se une al cuello.
@@ -12,6 +13,7 @@ import math
 from PIL import Image, ImageDraw
 
 MAGENTA = (255, 0, 127)
+AZUL = (0, 163, 255)
 BLANCO = (255, 255, 255)
 LIENZO = 4096
 K = LIENZO / 1024.0  # el diseño está pensado sobre una rejilla de 1024
@@ -22,8 +24,24 @@ def escalar(v):
     return v * K
 
 
+def fondo_degradado():
+    """Degradado diagonal: el color depende de (x + y), no solo de la altura.
+
+    Se pinta pequeño y se amplía: un degradado lineal escala sin artefactos y
+    evita recorrer 16 millones de píxeles en Python.
+    """
+    lado = 256
+    base = Image.new("RGB", (lado, lado))
+    pixeles = base.load()
+    for y in range(lado):
+        for x in range(lado):
+            t = (x + y) / (2 * (lado - 1))
+            pixeles[x, y] = tuple(round(MAGENTA[c] + (AZUL[c] - MAGENTA[c]) * t) for c in range(3))
+    return base.resize((LIENZO, LIENZO), Image.BICUBIC)
+
+
 def generar():
-    img = Image.new("RGB", (LIENZO, LIENZO), MAGENTA)
+    img = fondo_degradado()
     d = ImageDraw.Draw(img)
     grosor = int(escalar(62))
     r = grosor / 2

@@ -6,7 +6,7 @@ import { compartirCopia, descargarCopia, descargarExcel, restaurarCopia } from '
 import { Boton, Campo, Dinero, Entrada, Tarjeta } from '../ui'
 import { IconoBasura, IconoMas } from '../iconos'
 
-export default function Ajustes() {
+export default function Ajustes({ alAbrirAyuda }: { alAbrirAyuda: () => void }) {
   const [tipoCambio, setTipoCambio] = useState(20)
   const [multiplicador, setMultiplicador] = useState(2.5)
   const [aviso, setAviso] = useState('')
@@ -63,6 +63,21 @@ export default function Ajustes() {
       <header className="px-4 pb-3 pt-[calc(0.75rem+env(safe-area-inset-top))]">
         <h1 className="text-[26px] font-extrabold leading-none tracking-tight">Ajustes</h1>
       </header>
+
+      <div className="px-3">
+        <button
+          onClick={alAbrirAyuda}
+          className="flex w-full items-center justify-between rounded-2xl bg-white p-4 text-left shadow-[0_1px_3px_rgba(0,0,0,0.06)] active:bg-slate-50"
+        >
+          <span>
+            <span className="block text-[15px] font-bold">¿Cómo se usa?</span>
+            <span className="mt-0.5 block text-[12px] text-slate-400">
+              El manual, paso a paso. Se lee sin internet.
+            </span>
+          </span>
+          <span className="text-[20px] text-magenta">›</span>
+        </button>
+      </div>
 
       <div className="px-3">
         <Tarjeta className="space-y-3">
@@ -172,9 +187,9 @@ export default function Ajustes() {
       )}
 
       <p className="px-8 pt-2 text-center text-[11px] leading-relaxed text-slate-400">
-        Mi Clóset · funciona sin internet.
+        Funciona sin internet. Tus datos no salen de este teléfono.
         <br />
-        Hecho para Liz.
+        Hecho para <span className="degradado-lizy font-extrabold">Lizyblue</span>.
       </p>
     </div>
   )
