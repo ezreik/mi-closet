@@ -5,7 +5,8 @@
   font-style: normal;
   font-weight: 400 800;
   font-display: swap;
-  src: url('/fuentes/montserrat.woff2') format('woff2');
+  /* Ruta relativa a propósito: así Vite la reescribe con el base de despliegue. */
+  src: url('./fuentes/montserrat.woff2') format('woff2');
 }
 
 @theme {
